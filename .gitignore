@@ -1,0 +1,38 @@
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# --- Model weights (large binaries -- use Git LFS or share separately) ---
+*.pt
+*.pth
+*.onnx
+
+# --- Video footage (large binaries) ---
+*.mp4
+*.avi
+*.mov
+*.mkv
+real-life-footage/
+simulation-footage/
+models/pose-detection/training/
+
+**/node_modules/
+
+
+# --- Generated masks / verification outputs (regeneratable via newewe.py) ---
+models/track-segmentation/track_boundaries/masks/
+models/track-segmentation/track_boundaries/verification/
+*.npy
+*.npz
+
+# --- Ray / Kafka runtime artifacts ---
+ray_results/
+/tmp/ray/
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+*.log

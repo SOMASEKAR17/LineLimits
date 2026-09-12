@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "simulation": {
+      "label": "Simulation Footage",
+      "description": "Pre-rendered 2 min synced clips for dry-running the pipeline",
+      "dir": "../simulation-footage"
+    },
+    "real": {
+      "label": "Real-Life Footage",
+      "description": "Live-session recordings from the 8 trackside cameras",
+      "dir": "../real-life-footage"
+    }
+  },
+  "videoExtensions": [".mp4", ".mov", ".mkv", ".avi"],
+  "cameraCount": 8,
+  "mockTelemetry": true
+}

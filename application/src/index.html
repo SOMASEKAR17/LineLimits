@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' file:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; media-src 'self' file:;" />
+  <title>lineLimits &mdash; Race Control</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="app-window">
+
+  <!-- Custom frameless titlebar -->
+  <header class="titlebar" id="titlebar">
+    <div class="titlebar-utility">
+      <div class="avatar-circle" aria-hidden="true">RC</div>
+      <span class="titlebar-name">Race Control</span>
+      <span class="metric-pill" id="alert-count-pill">0 pending</span>
+    </div>
+    <div class="window-controls">
+      <button class="control-dot dot-minimize" id="btn-minimize" title="Minimize"></button>
+      <button class="control-dot dot-maximize" id="btn-maximize" title="Maximize"></button>
+      <button class="control-dot dot-close" id="btn-close" title="Close"></button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+
+    <!-- ===================== SIDE NAV ===================== -->
+    <nav class="side-nav" id="side-nav">
+      <button class="nav-item active" data-section="live">Live</button>
+      <button class="nav-item" data-section="review">
+        Review Timeline
+        <span class="nav-badge" id="review-nav-badge" hidden>0</span>
+      </button>
+      <button class="nav-item" data-section="records">Steward Review Records</button>
+      <button class="nav-item" data-section="upload">Footage Upload</button>
+    </nav>
+
+    <main class="app-main">
+
+      <!-- ===================== LIVE ===================== -->
+      <section class="screen live-screen" id="section-live">
+
+        <div class="live-toolbar">
+          <div class="source-toggle" id="live-source-toggle">
+            <button class="pill-toggle active" data-source="simulation">Simulation</button>
+            <button class="pill-toggle" data-source="real">Real-Life</button>
+          </div>
+          <span class="text-muted-label" id="live-source-status"></span>
+        </div>
+
+        <div class="dashboard-body">
+          <div class="camera-viewport" id="camera-viewport">
+            <div class="camera-grid" id="camera-grid">
+              <!-- camera tiles injected by renderer.js -->
+            </div>
+          </div>
+
+          <aside class="side-panel">
+            <div class="app-card camera-select-card">
+              <div class="panel-heading">
+                <h2>Cameras</h2>
+                <span class="text-muted-label" id="cam-select-mode">All 8</span>
+              </div>
+              <div class="camera-pill-grid" id="camera-pill-grid">
+                <!-- pills injected by renderer.js -->
+              </div>
+            </div>
+
+            <div class="app-card telemetry-card">
+              <div class="panel-heading">
+                <h2>Telemetry Stream</h2>
+                <span class="text-muted-label">Tier 1 &middot; all cameras</span>
+              </div>
+              <div class="telemetry-body" id="telemetry-body"></div>
+            </div>
+          </aside>
+        </div>
+
+        <footer class="sync-bar">
+          <button class="btn-primary btn-sync-toggle" id="btn-sync-toggle">Play all</button>
+          <input type="range" id="sync-scrubber" class="sync-scrubber" min="0" max="1000" value="0" />
+          <span class="sync-timecode" id="sync-timecode">00:00 / 00:00</span>
+          <div class="zoom-control" id="zoom-control" hidden>
+            <button class="btn-icon" id="zoom-out" title="Zoom out">&minus;</button>
+            <span class="text-muted-label" id="zoom-level">100%</span>
+            <button class="btn-icon" id="zoom-in" title="Zoom in">&plus;</button>
+          </div>
+          <button class="btn-flag" id="btn-flag" title="Flag the current frame for steward review">Flag</button>
+        </footer>
+
+      </section>
+
+      <!-- ===================== REVIEW TIMELINE ===================== -->
+      <section class="screen review-screen" id="section-review" hidden>
+        <div class="review-layout">
+
+          <div class="app-card queue-card">
+            <div class="panel-heading">
+              <h2>Pending Incidents</h2>
+              <span class="text-muted-label" id="queue-count">0 pending</span>
+            </div>
+            <div class="queue-body" id="queue-body">
+              <p class="empty-state">No incidents pending review.</p>
+            </div>
+          </div>
+
+          <div class="app-card incident-detail-card" id="incident-detail-card">
+            <div class="incident-empty" id="incident-empty">
+              <p class="empty-state">Select an incident from the queue to begin review.</p>
+            </div>
+
+            <div class="incident-detail" id="incident-detail" hidden>
+              <div class="review-modal-header">
+                <h2 id="incident-title">Incident</h2>
+                <span class="text-muted-label" id="incident-meta"></span>
+              </div>
+
+              <div class="incident-video-grid" id="incident-video-grid">
+                <!-- per-camera tiles injected by renderer.js -->
+              </div>
+
+              <div class="slider-row">
+                <div class="slider-meta">
+                  <span class="slider-label">Frame</span>
+                  <span class="slider-value" id="incident-frame-value">0</span>
+                </div>
+                <input type="range" id="incident-slider" class="param-slider" min="0" max="100" value="0" />
+                <div class="slider-bounds">
+                  <span id="incident-min">min: 0</span>
+                  <span id="incident-max">max: 0</span>
+                </div>
+              </div>
+
+              <div class="incident-camera-manager">
+                <span class="text-muted-label">Cameras in this review</span>
+                <div class="camera-pill-grid" id="incident-camera-pills">
+                  <!-- pills injected by renderer.js -->
+                </div>
+              </div>
+
+              <div class="review-actions decision-actions">
+                <button class="btn-decision btn-no-action" data-decision="No Action">No Action</button>
+                <button class="btn-decision btn-no-penalty" data-decision="No Penalty">No Penalty</button>
+                <button class="btn-decision btn-penalty" data-decision="Penalty">Penalty</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================== STEWARD REVIEW RECORDS ===================== -->
+      <section class="screen records-screen" id="section-records" hidden>
+        <div class="app-card records-card">
+          <div class="panel-heading">
+            <h2>Steward Review Records</h2>
+            <span class="text-muted-label" id="records-count">0 records</span>
+          </div>
+
+          <div class="records-filters">
+            <select id="filter-camera">
+              <option value="all">All cameras</option>
+            </select>
+            <select id="filter-decision">
+              <option value="all">All decisions</option>
+              <option value="Penalty">Penalty</option>
+              <option value="No Penalty">No Penalty</option>
+              <option value="No Action">No Action</option>
+            </select>
+            <input type="text" id="filter-search" placeholder="Search records&hellip;" />
+          </div>
+
+          <div class="records-table-wrap">
+            <table class="records-table">
+              <thead>
+                <tr>
+                  <th>Camera(s)</th>
+                  <th>Type</th>
+                  <th>Frame Range</th>
+                  <th>Flagged</th>
+                  <th>Reviewed</th>
+                  <th>Decision</th>
+                </tr>
+              </thead>
+              <tbody id="records-tbody"></tbody>
+            </table>
+            <p class="empty-state" id="records-empty" hidden>No review records match your filters.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== FOOTAGE UPLOAD ===================== -->
+      <section class="screen upload-screen" id="section-upload" hidden>
+        <div class="upload-layout">
+
+          <div class="app-card upload-card">
+            <div class="panel-heading">
+              <h2>Footage Upload</h2>
+            </div>
+            <span class="text-muted-label">Add clips to a footage folder</span>
+
+            <div class="source-toggle" id="upload-source-toggle">
+              <button class="pill-toggle active" data-source="simulation">Simulation Footage</button>
+              <button class="pill-toggle" data-source="real">Real-Life Footage</button>
+            </div>
+
+            <p class="upload-hint">
+              Files are copied into <code id="upload-target-dir">../simulation-footage</code>.
+              Name clips like <code>CAM-1.mp4</code> &hellip; <code>CAM-8.mp4</code> so lineLimits
+              can match each clip to a camera automatically.
+            </p>
+
+            <button class="btn-primary" id="btn-upload-files">Choose video files&hellip;</button>
+            <p class="upload-status" id="upload-status"></p>
+          </div>
+
+          <div class="app-card upload-list-card">
+            <div class="panel-heading">
+              <h2>Clips in folder</h2>
+              <button class="text-link" id="btn-refresh-upload-list">Refresh</button>
+            </div>
+            <div class="upload-file-list" id="upload-file-list">
+              <p class="empty-state">No clips found.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

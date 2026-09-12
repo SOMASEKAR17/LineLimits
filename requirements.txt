@@ -1,0 +1,11 @@
+# --- Core CV / ML (used by video_pose.py, newewe.py, and the pipeline) ---
+numpy
+opencv-python
+torch          # for CUDA build: pip install torch --index-url https://download.pytorch.org/whl/cu124
+ultralytics    # YOLO pose model (video_pose.py) + Tier 1 YOLO option
+
+# --- New pipeline: Tier 2 parallel processing ---
+ray[default]
+
+# --- New pipeline: Tier 3 alerting to Electron ---
+kafka-python

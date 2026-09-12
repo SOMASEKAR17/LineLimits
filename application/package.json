@@ -1,0 +1,14 @@
+{
+  "name": "linelimits-dashboard",
+  "version": "0.1.0",
+  "description": "Race control dashboard for the lineLimits track-limit violation system",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
