@@ -1,0 +1,1 @@
+An automation helper for identifying if and when F1 cars exceed track limits. Built to help stewards and to mitigate the problem of compounding amount of clips that stewards have to analyze to check cars exceeding track limits.
