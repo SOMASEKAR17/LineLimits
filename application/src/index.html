@@ -11,9 +11,8 @@
   <!-- Custom frameless titlebar -->
   <header class="titlebar" id="titlebar">
     <div class="titlebar-utility">
-      <div class="avatar-circle" aria-hidden="true">RC</div>
+      <img class="app-logo" src="assets/logo.png" alt="Logo" />
       <span class="titlebar-name">Race Control</span>
-      <span class="metric-pill" id="alert-count-pill">0 pending</span>
     </div>
     <div class="window-controls">
       <button class="control-dot dot-minimize" id="btn-minimize" title="Minimize"></button>
@@ -35,6 +34,11 @@
       <button class="nav-item" data-section="upload">Footage Upload</button>
     </nav>
 
+    <button class="side-nav-toggle" id="side-nav-toggle" title="Toggle navigation" aria-label="Toggle navigation">
+      <span id="side-nav-toggle-arrow">&lsaquo;</span>
+    </button>
+    <div class="side-nav-backdrop" id="side-nav-backdrop" hidden></div>
+
     <main class="app-main">
 
       <!-- ===================== LIVE ===================== -->
@@ -46,6 +50,7 @@
             <button class="pill-toggle" data-source="real">Real-Life</button>
           </div>
           <span class="text-muted-label" id="live-source-status"></span>
+          <button class="btn-primary" id="btn-run-pipeline" style="margin-left:auto; padding:8px 18px; font-size:13px;">Run Pipeline</button>
         </div>
 
         <div class="dashboard-body">
@@ -66,12 +71,14 @@
               </div>
             </div>
 
-            <div class="app-card telemetry-card">
+            <div class="app-card incident-feed-card">
               <div class="panel-heading">
-                <h2>Telemetry Stream</h2>
-                <span class="text-muted-label">Tier 1 &middot; all cameras</span>
+                <h2>Incident Feed</h2>
+                <span class="text-muted-label" id="incident-feed-count">0 incidents</span>
               </div>
-              <div class="telemetry-body" id="telemetry-body"></div>
+              <div class="incident-feed-body" id="incident-feed-body">
+                <p class="empty-state" id="incident-feed-empty">No incidents detected yet.</p>
+              </div>
             </div>
           </aside>
         </div>
@@ -84,6 +91,11 @@
             <button class="btn-icon" id="zoom-out" title="Zoom out">&minus;</button>
             <span class="text-muted-label" id="zoom-level">100%</span>
             <button class="btn-icon" id="zoom-in" title="Zoom in">&plus;</button>
+          </div>
+          <div class="speed-toggle" id="speed-toggle">
+            <button class="speed-btn active" data-speed="2">2&times;</button>
+            <button class="speed-btn" data-speed="5">5&times;</button>
+            <button class="speed-btn" data-speed="10">10&times;</button>
           </div>
           <button class="btn-flag" id="btn-flag" title="Flag the current frame for steward review">Flag</button>
         </footer>
@@ -115,6 +127,8 @@
                 <span class="text-muted-label" id="incident-meta"></span>
               </div>
 
+              <div class="incident-car-panel" id="incident-car"></div>
+
               <div class="incident-video-grid" id="incident-video-grid">
                 <!-- per-camera tiles injected by renderer.js -->
               </div>
@@ -124,7 +138,11 @@
                   <span class="slider-label">Frame</span>
                   <span class="slider-value" id="incident-frame-value">0</span>
                 </div>
-                <input type="range" id="incident-slider" class="param-slider" min="0" max="100" value="0" />
+                <div class="slider-with-steps">
+                  <button class="btn-icon frame-step-btn" id="frame-step-minus" title="Previous frame">&minus;</button>
+                  <input type="range" id="incident-slider" class="param-slider" min="0" max="100" value="0" />
+                  <button class="btn-icon frame-step-btn" id="frame-step-plus" title="Next frame">&plus;</button>
+                </div>
                 <div class="slider-bounds">
                   <span id="incident-min">min: 0</span>
                   <span id="incident-max">max: 0</span>
@@ -161,13 +179,16 @@
             <select id="filter-camera">
               <option value="all">All cameras</option>
             </select>
+            <select id="filter-team">
+              <option value="all">All teams</option>
+            </select>
             <select id="filter-decision">
               <option value="all">All decisions</option>
               <option value="Penalty">Penalty</option>
               <option value="No Penalty">No Penalty</option>
               <option value="No Action">No Action</option>
             </select>
-            <input type="text" id="filter-search" placeholder="Search records&hellip;" />
+            <input type="text" id="filter-search" placeholder="Search car, driver, team&hellip;" />
           </div>
 
           <div class="records-table-wrap">
@@ -175,6 +196,7 @@
               <thead>
                 <tr>
                   <th>Camera(s)</th>
+                  <th>Car</th>
                   <th>Type</th>
                   <th>Frame Range</th>
                   <th>Flagged</th>
