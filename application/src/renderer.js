@@ -38,6 +38,7 @@ const sections = {
   live: document.getElementById('section-live'),
   review: document.getElementById('section-review'),
   records: document.getElementById('section-records'),
+  analysis: document.getElementById('section-analysis'),
   upload: document.getElementById('section-upload'),
 };
 
@@ -88,6 +89,7 @@ function showSection(name) {
 
   if (name === 'review') renderQueue();
   if (name === 'records') renderRecordsTable();
+  if (name === 'analysis') renderAnalysis();
   if (name === 'upload') refreshUploadFileList();
 }
 
@@ -203,6 +205,7 @@ function paintCarIdentity(incident) {
     .forEach((slot) => { slot.innerHTML = carChipHTML(incident.car); });
 
   if (!sections.records.hidden) renderRecordsTable();
+  if (!sections.analysis.hidden) renderAnalysis();
 }
 
 function refreshBadges() {
@@ -1232,6 +1235,7 @@ document.querySelectorAll('.btn-decision').forEach((btn) => {
     closeIncidentDetail();
     refreshBadges();
     renderQueue();
+    if (!sections.analysis.hidden) renderAnalysis();
   });
 });
 

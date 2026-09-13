@@ -31,6 +31,7 @@
         <span class="nav-badge" id="review-nav-badge" hidden>0</span>
       </button>
       <button class="nav-item" data-section="records">Steward Review Records</button>
+      <button class="nav-item" data-section="analysis">Analysis</button>
       <button class="nav-item" data-section="upload">Footage Upload</button>
     </nav>
 
@@ -211,6 +212,99 @@
         </div>
       </section>
 
+
+      <!-- ===================== ANALYSIS ===================== -->
+      <section class="screen analysis-screen" id="section-analysis" hidden>
+
+        <div class="analysis-filters" id="analysis-filters">
+          <span class="text-muted-label">Scope</span>
+          <select id="analysis-filter-corner">
+            <option value="all">All corners</option>
+          </select>
+          <select id="analysis-filter-team">
+            <option value="all">All teams</option>
+          </select>
+          <select id="analysis-filter-decision">
+            <option value="all">All outcomes</option>
+            <option value="Penalty">Penalty</option>
+            <option value="No Penalty">No Penalty</option>
+            <option value="No Action">No Action</option>
+            <option value="Pending">Pending</option>
+          </select>
+          <button class="text-link" id="analysis-filter-reset">Reset</button>
+          <span class="text-muted-label analysis-scope-note" id="analysis-scope-note"></span>
+        </div>
+
+        <div class="analysis-grid" id="analysis-grid">
+          <!-- Incidents by corner -->
+          <div class="app-card analysis-card" data-chart="corner">
+            <div class="panel-heading">
+              <h2>Incidents by corner</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-corner">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">This session &middot; violations per marshalling loop</span>
+            <div class="chart-body" id="chart-corner"></div>
+          </div>
+          <!-- Review outcomes -->
+          <div class="app-card analysis-card" data-chart="outcomes">
+            <div class="panel-heading">
+              <h2>Review outcomes</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-outcomes">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">This session &middot; how many detections the stewards upheld</span>
+            <div class="chart-body" id="chart-outcomes"></div>
+          </div>
+          <!-- Corner heatmap -->
+          <div class="app-card analysis-card" data-chart="heatmap">
+            <div class="panel-heading">
+              <h2>Corner heatmap</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-heatmap">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">Where incidents cluster around the circuit</span>
+            <div class="chart-body" id="chart-heatmap"></div>
+          </div>
+          <!-- Incidents over time -->
+          <div class="app-card analysis-card" data-chart="timeline">
+            <div class="panel-heading">
+              <h2>Incidents over time</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-timeline">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">This session &middot; distribution across the clip timeline</span>
+            <div class="chart-body" id="chart-timeline"></div>
+          </div>
+          <!-- Incidents per driver -->
+          <div class="app-card analysis-card analysis-card-wide" data-chart="drivers">
+            <div class="panel-heading">
+              <h2>Incidents per driver</h2>
+              <span class="text-muted-label" id="drivers-count"></span>
+            </div>
+            <span class="text-muted-label chart-subtitle">This session, ranked &middot; season total shown alongside</span>
+            <div class="chart-body" id="chart-drivers"></div>
+          </div>
+          <!-- Review time -->
+          <div class="app-card analysis-card" data-chart="reviewtime">
+            <div class="panel-heading">
+              <h2>Time to decision</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-reviewtime">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">How long each incident sat before a steward ruled on it</span>
+            <div class="chart-body" id="chart-reviewtime"></div>
+          </div>
+          <!-- Cross-session trend -->
+          <div class="app-card analysis-card" data-chart="trend">
+            <div class="panel-heading">
+              <h2>Driver trend across rounds</h2>
+              <button class="text-link chart-view-toggle" data-target="chart-trend">Table</button>
+            </div>
+            <span class="text-muted-label chart-subtitle">Violations per round &middot; archived race control records plus this session</span>
+            <div class="chart-body" id="chart-trend"></div>
+          </div>
+
+        </div>
+
+        <div class="chart-tooltip" id="chart-tooltip" hidden></div>
+      </section>
+
       <!-- ===================== FOOTAGE UPLOAD ===================== -->
       <section class="screen upload-screen" id="section-upload" hidden>
         <div class="upload-layout">
@@ -253,5 +347,6 @@
   </div>
 
   <script src="renderer.js"></script>
+  <script src="analysis.js"></script>
 </body>
 </html>

@@ -384,6 +384,51 @@ ipcMain.handle('get-entry-list', () => {
   return [...carIdentifier.entries.values()];
 });
 
+// The circuit's marshalling loops: corner number, camera, and the node
+// position used to draw the track map in the Analysis tab.
+ipcMain.handle('get-track-loops', () => {
+  return [...carIdentifier.loops.values()];
+});
+
+// ------------------------------------------------------------------
+// Archived race-control data — previous rounds of this season.
+// Lets the Analysis tab put the current session in context instead of
+// only ever showing one race's worth of incidents.
+// ------------------------------------------------------------------
+
+const SESSION_HISTORY_FILE = path.join(PROJECT_ROOT, 'pipeline', 'session_history.jsonl');
+
+ipcMain.handle('get-session-history', () => {
+  if (!fs.existsSync(SESSION_HISTORY_FILE)) return [];
+
+  return fs.readFileSync(SESSION_HISTORY_FILE, 'utf-8')
+    .trim()
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => {
+      try { return JSON.parse(line); } catch { return null; }
+    })
+    .filter(Boolean)
+    .map((record) => {
+      // Car numbers in the archive resolve against the same entry list
+      // the live pipeline uses, so driver/team naming never diverges.
+      const entry = carIdentifier.entries.get(Number(record.car));
+      return {
+        ...record,
+        car: entry
+          ? {
+              number: entry.car,
+              driver: entry.driver,
+              code: entry.code || '',
+              team: entry.team,
+              teamShort: entry.team_short || entry.team,
+              teamColour: entry.colour || '#9CA3AF',
+            }
+          : null,
+      };
+    });
+});
+
 // ------------------------------------------------------------------
 // Load existing violations on demand (renderer requests at boot)
 // ------------------------------------------------------------------

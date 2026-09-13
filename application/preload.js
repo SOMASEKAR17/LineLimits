@@ -29,6 +29,8 @@ contextBridge.exposeInMainWorld('api', {
   identifyCar: (camera, startFrame, endFrame) =>
     ipcRenderer.invoke('identify-car', camera, startFrame, endFrame),
   getEntryList: () => ipcRenderer.invoke('get-entry-list'),
+  getTrackLoops: () => ipcRenderer.invoke('get-track-loops'),
+  getSessionHistory: () => ipcRenderer.invoke('get-session-history'),
 
   // Events from main process
   onTelemetryEvent: (callback) => {

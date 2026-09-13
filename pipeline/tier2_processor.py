@@ -111,9 +111,11 @@ def process_locked_clip(
 
     violating_frames = []
     probabilities = []
+    flagged_local_indices = set()
     for local_idx, prob in flagged_pairs:
         violating_frames.append(int(frame_indices[local_idx]))
         probabilities.append(prob)
+        flagged_local_indices.add(local_idx)
 
     avg_probability = round(sum(probabilities) / len(probabilities), 4) if probabilities else 0.0
 
@@ -125,4 +127,7 @@ def process_locked_clip(
         "avg_probability": avg_probability,
         "clip_start_frame": int(frame_indices[0]),
         "clip_end_frame": int(frame_indices[-1]),
+        # Overlay data for annotated clip rendering
+        "detections": per_frame_detections,
+        "flagged_local_indices": flagged_local_indices,
     }

@@ -1,0 +1,291 @@
+{
+  "session": {
+    "event": "Round 17 \u2014 Race",
+    "circuit": "Marina Bay Street Circuit",
+    "fps": 30,
+    "loop_count": 8,
+    "session_id": "R17",
+    "round": 17,
+    "label": "R17"
+  },
+  "entries": [
+    {
+      "car": 1,
+      "driver": "Max Verstappen",
+      "code": "VER",
+      "team": "Red Bull Racing Formula 1 Team",
+      "team_short": "Red Bull",
+      "colour": "#3671C6",
+      "transponder": "TR-0001"
+    },
+    {
+      "car": 22,
+      "driver": "Yuki Tsunoda",
+      "code": "TSU",
+      "team": "Red Bull Racing Formula 1 Team",
+      "team_short": "Red Bull",
+      "colour": "#3671C6",
+      "transponder": "TR-0022"
+    },
+    {
+      "car": 4,
+      "driver": "Lando Norris",
+      "code": "NOR",
+      "team": "McLaren Formula 1 Team",
+      "team_short": "McLaren",
+      "colour": "#FF8000",
+      "transponder": "TR-0004"
+    },
+    {
+      "car": 81,
+      "driver": "Oscar Piastri",
+      "code": "PIA",
+      "team": "McLaren Formula 1 Team",
+      "team_short": "McLaren",
+      "colour": "#FF8000",
+      "transponder": "TR-0081"
+    },
+    {
+      "car": 16,
+      "driver": "Charles Leclerc",
+      "code": "LEC",
+      "team": "Scuderia Ferrari HP",
+      "team_short": "Ferrari",
+      "colour": "#E8002D",
+      "transponder": "TR-0016"
+    },
+    {
+      "car": 44,
+      "driver": "Lewis Hamilton",
+      "code": "HAM",
+      "team": "Scuderia Ferrari HP",
+      "team_short": "Ferrari",
+      "colour": "#E8002D",
+      "transponder": "TR-0044"
+    },
+    {
+      "car": 63,
+      "driver": "George Russell",
+      "code": "RUS",
+      "team": "Mercedes-AMG PETRONAS F1 Team",
+      "team_short": "Mercedes",
+      "colour": "#27F4D2",
+      "transponder": "TR-0063"
+    },
+    {
+      "car": 12,
+      "driver": "Andrea Kimi Antonelli",
+      "code": "ANT",
+      "team": "Mercedes-AMG PETRONAS F1 Team",
+      "team_short": "Mercedes",
+      "colour": "#27F4D2",
+      "transponder": "TR-0012"
+    },
+    {
+      "car": 14,
+      "driver": "Fernando Alonso",
+      "code": "ALO",
+      "team": "Aston Martin Aramco F1 Team",
+      "team_short": "Aston Martin",
+      "colour": "#229971",
+      "transponder": "TR-0014"
+    },
+    {
+      "car": 18,
+      "driver": "Lance Stroll",
+      "code": "STR",
+      "team": "Aston Martin Aramco F1 Team",
+      "team_short": "Aston Martin",
+      "colour": "#229971",
+      "transponder": "TR-0018"
+    },
+    {
+      "car": 10,
+      "driver": "Pierre Gasly",
+      "code": "GAS",
+      "team": "BWT Alpine F1 Team",
+      "team_short": "Alpine",
+      "colour": "#0093CC",
+      "transponder": "TR-0010"
+    },
+    {
+      "car": 43,
+      "driver": "Franco Colapinto",
+      "code": "COL",
+      "team": "BWT Alpine F1 Team",
+      "team_short": "Alpine",
+      "colour": "#0093CC",
+      "transponder": "TR-0043"
+    },
+    {
+      "car": 31,
+      "driver": "Esteban Ocon",
+      "code": "OCO",
+      "team": "MoneyGram Haas F1 Team",
+      "team_short": "Haas",
+      "colour": "#B6BABD",
+      "transponder": "TR-0031"
+    },
+    {
+      "car": 87,
+      "driver": "Oliver Bearman",
+      "code": "BEA",
+      "team": "MoneyGram Haas F1 Team",
+      "team_short": "Haas",
+      "colour": "#B6BABD",
+      "transponder": "TR-0087"
+    },
+    {
+      "car": 6,
+      "driver": "Isack Hadjar",
+      "code": "HAD",
+      "team": "Visa Cash App Racing Bulls Formula One Team",
+      "team_short": "Racing Bulls",
+      "colour": "#6692FF",
+      "transponder": "TR-0006"
+    },
+    {
+      "car": 30,
+      "driver": "Liam Lawson",
+      "code": "LAW",
+      "team": "Visa Cash App Racing Bulls Formula One Team",
+      "team_short": "Racing Bulls",
+      "colour": "#6692FF",
+      "transponder": "TR-0030"
+    },
+    {
+      "car": 23,
+      "driver": "Alexander Albon",
+      "code": "ALB",
+      "team": "Atlassian Williams Racing",
+      "team_short": "Williams",
+      "colour": "#64C4FF",
+      "transponder": "TR-0023"
+    },
+    {
+      "car": 55,
+      "driver": "Carlos Sainz",
+      "code": "SAI",
+      "team": "Atlassian Williams Racing",
+      "team_short": "Williams",
+      "colour": "#64C4FF",
+      "transponder": "TR-0055"
+    },
+    {
+      "car": 27,
+      "driver": "Nico Hulkenberg",
+      "code": "HUL",
+      "team": "Stake F1 Team Kick Sauber",
+      "team_short": "Kick Sauber",
+      "colour": "#52E252",
+      "transponder": "TR-0027"
+    },
+    {
+      "car": 5,
+      "driver": "Gabriel Bortoleto",
+      "code": "BOR",
+      "team": "Stake F1 Team Kick Sauber",
+      "team_short": "Kick Sauber",
+      "colour": "#52E252",
+      "transponder": "TR-0005"
+    }
+  ],
+  "loops": [
+    {
+      "loop_id": "L01",
+      "camera": "CAM1",
+      "sector": 1,
+      "marshalling_post": "MP-03",
+      "description": "Turn 1",
+      "corner": 1,
+      "layout": {
+        "x": 104,
+        "y": 128
+      }
+    },
+    {
+      "loop_id": "L02",
+      "camera": "CAM2",
+      "sector": 1,
+      "marshalling_post": "MP-06",
+      "description": "Turn 2",
+      "corner": 2,
+      "layout": {
+        "x": 188,
+        "y": 64
+      }
+    },
+    {
+      "loop_id": "L03",
+      "camera": "CAM3",
+      "sector": 1,
+      "marshalling_post": "MP-09",
+      "description": "Turn 3",
+      "corner": 3,
+      "layout": {
+        "x": 262,
+        "y": 58
+      }
+    },
+    {
+      "loop_id": "L04",
+      "camera": "CAM4",
+      "sector": 2,
+      "marshalling_post": "MP-12",
+      "description": "Turn 4",
+      "corner": 4,
+      "layout": {
+        "x": 412,
+        "y": 72
+      }
+    },
+    {
+      "loop_id": "L05",
+      "camera": "CAM5",
+      "sector": 2,
+      "marshalling_post": "MP-15",
+      "description": "Turn 5",
+      "corner": 5,
+      "layout": {
+        "x": 528,
+        "y": 132
+      }
+    },
+    {
+      "loop_id": "L06",
+      "camera": "CAM6",
+      "sector": 2,
+      "marshalling_post": "MP-18",
+      "description": "Turn 6",
+      "corner": 6,
+      "layout": {
+        "x": 498,
+        "y": 230
+      }
+    },
+    {
+      "loop_id": "L07",
+      "camera": "CAM7",
+      "sector": 3,
+      "marshalling_post": "MP-21",
+      "description": "Turn 7",
+      "corner": 7,
+      "layout": {
+        "x": 338,
+        "y": 262
+      }
+    },
+    {
+      "loop_id": "L08",
+      "camera": "CAM8",
+      "sector": 3,
+      "marshalling_post": "MP-24",
+      "description": "Turn 8",
+      "corner": 8,
+      "layout": {
+        "x": 166,
+        "y": 236
+      }
+    }
+  ]
+}

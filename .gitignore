@@ -18,8 +18,11 @@ venv/
 real-life-footage/
 simulation-footage/
 models/pose-detection/training/
+footage-mappings.txt
 
 **/node_modules/
+
+**/footage_mappings.py
 
 
 # --- Generated masks / verification outputs (regeneratable via newewe.py) ---
